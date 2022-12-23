@@ -19,10 +19,13 @@
 # of the first string. Check if the second string is one of these.
 
 def first_anagram?(str1, str2)
-    all_anagrams1 = str1.split("").permutation.to_a.map(&:join) #O(n! + n^2)
-    all_anagrams1.include?(str2) #(n)
+    all_anagrams1 = str1.split("").permutation.to_a.map(&:join)
+                        # (n)    +      (n!)   + (n!) + (n!*n)  => reduces down to O(n *n!) 
+                                                        # ^
+                                                      #bottleneck
+    all_anagrams1.include?(str2) # O(n!*n)                     
 end
-# O(n!)
+# O(2n!*n) reduces down to => O(n*n!)
 
 p first_anagram?("gizmo", "sally")    #=> false
 p first_anagram?("elvis", "lives")    #=> true
